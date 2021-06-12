@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./style/App.css";
+// store
+import StoreProvider from "./store/StoreProvider";
+// component
+import AuthLayer from "./authLayer";
+import DataLayer from "./dataLayer";
+// route
+import RouterLayer from "./routerLayer";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <StoreProvider>
+            {/* AuthLayer: 定義 authentication, 通過 authentication 才會 render children */}
+            <AuthLayer>
+                {/* DataLayer: 要 fetch API(e.g. 網站基本設定) 並儲存至 store, 可在此定義 */}
+                <DataLayer />
+                {/* RouterLayer: 路由設定 */}
+                <RouterLayer />
+            </AuthLayer>
+        </StoreProvider>
+    );
 }
 
 export default App;
