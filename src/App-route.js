@@ -1,5 +1,6 @@
 import Home from "./components/Home/index";
 import User from "./components/User/index";
+import setting from "./components/setting";
 //
 const routes = [
     {
@@ -21,6 +22,16 @@ const routes = [
         public: true, // 若在維護開發中請設定 false
         authority: null,
         component: User,
+    },
+    {
+        key: "route-setting",
+        name: "setting",
+        path: "/setting",
+        withHeader: true,
+        withFooter: true,
+        public: true, // 若在維護開發中請設定 false
+        authority: null,
+        component: setting,
     },
 ];
 
