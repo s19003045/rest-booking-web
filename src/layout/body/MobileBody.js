@@ -6,9 +6,8 @@ import Box from "@material-ui/core/Box";
 const MobileBody = ({ component: Component, authorize }) => {
     /** 可以設定 RWD: mobile 整體樣式 */
     return (
-        <Box>
+        <Box height="calc(100vh - 124px)" overflow="auto">
             <Container>
-                <h4>Mobile Body</h4>
                 <Component />
             </Container>
         </Box>
