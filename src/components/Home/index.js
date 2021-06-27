@@ -15,19 +15,19 @@ const tabs = {
         key: "home-tab-01",
         label: "新增餐廳",
         icon: null,
-        component: <NewList />,
+        component: NewList,
     },
     1: {
         key: "home-tab-02",
         label: "餐廳清單",
         icon: null,
-        component: <AllList />,
+        component: AllList,
     },
     2: {
         key: "home-tab-03",
         label: null,
         icon: <SearchOutlinedIcon />,
-        component: <Search />,
+        component: Search,
     },
 };
 
@@ -64,10 +64,12 @@ const Home = () => {
                 handleTabChange={handleTabChange}
                 curTab={curTab}
             />
-            <Box mt="65px" mb="65px">
+            <Box height="48px" />
+            <Box pt="25px" pb="20px">
                 {tabs && tabs[curTab] && (
                     <TabComponentHOC
-                        component={() => tabs[curTab].component}
+                        // component={() => tabs[curTab].component}
+                        component={tabs[curTab].component}
                         restList={curRestList}
                     />
                 )}
