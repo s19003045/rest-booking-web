@@ -9,6 +9,7 @@ const API = {
     // testing API
     test: () => `${domain}/test`,
     //
+    searchRestByKeyword: () => `${domain}/search?keyword={keyword}`,
 };
 
 export default API;
