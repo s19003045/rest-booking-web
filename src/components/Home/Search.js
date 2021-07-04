@@ -24,6 +24,12 @@ const CLASS_TYPE = {
     default: "default",
 };
 
+const SERACH_STATE = {
+    initial: "initial",
+    searching: "searching",
+    finishSearch: "finishSearch",
+};
+
 const Search = ({ restList }) => {
     // props
     // mock data: 在 API 建立前先用假資料
@@ -47,7 +53,8 @@ const Search = ({ restList }) => {
     const [preKeyword, setPreKeyword] = useState(""); // 前次搜尋關鍵字
     const [disableSearch, setDisableSearch] = useState(false);
     const [defaultValue] = useState(keyword || "");
-    const [curRestList, setCurRestList] = useState(restList);
+    const [curRestList, setCurRestList] = useState(null);
+    const [searchState, setSearchState] = useState(SERACH_STATE.initial);
     const [curClassType, setCurClassType] = useState(CLASS_TYPE.default);
     const [preCurClassType, setPreCurClassType] = useState(CLASS_TYPE.default);
 
@@ -122,6 +129,7 @@ const Search = ({ restList }) => {
 
     useEffect(() => {
         if (startSearch) {
+            setSearchState(SERACH_STATE.searching);
             // todo: 暫時先以假資料測試
             searchRestByKeyword(currentKeyword, dispatch)
                 .then((data) => {
@@ -144,6 +152,7 @@ const Search = ({ restList }) => {
                         type: Act.START_SEARCH,
                         payload: false,
                     });
+                    setSearchState(SERACH_STATE.finishSearch);
                 });
         }
     }, [startSearch]);
@@ -157,15 +166,21 @@ const Search = ({ restList }) => {
     }, [searchQuery]);
 
     const handleInfoClick = (e, restaurant) => {
-        console.log("handleInfoClick", restaurant);
+        history.push({
+            pathname: "restInfo",
+            search: `restId=${restaurant.id}`,
+        });
     };
 
     const handleImgClick = (e, restaurant) => {
-        console.log("handleImgClick", restaurant);
+        history.push({
+            pathname: "restInfo",
+            search: `restId=${restaurant.id}`,
+        });
     };
 
     const handleCheckboxChange = (e, restaurant) => {
-        console.log("handleCheckboxChange", restaurant);
+        // console.log("handleCheckboxChange", restaurant);
     };
 
     return (
@@ -205,13 +220,19 @@ const Search = ({ restList }) => {
                             </Grid>
                         </Box>
                     ))}
-                {(!curRestList ||
-                    (Array.isArray(curRestList) && curRestList).length ===
-                        0) && (
+                {searchState === SERACH_STATE.finishSearch &&
+                    (!curRestList ||
+                        (Array.isArray(curRestList) && curRestList).length ===
+                            0) && (
+                        <Box textAlign="center" mt={4}>
+                            <Typography variant="h5">
+                                抱歉！找不到符合的資訊
+                            </Typography>
+                        </Box>
+                    )}
+                {searchState === SERACH_STATE.initial && (
                     <Box textAlign="center" mt={4}>
-                        <Typography variant="h5">
-                            抱歉！找不到符合的資訊
-                        </Typography>
+                        <Typography variant="h5">請輸入關鍵字搜尋</Typography>
                     </Box>
                 )}
             </Grid>

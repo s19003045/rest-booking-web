@@ -9,6 +9,11 @@ const API = {
     // testing API
     test: () => `${domain}/test`,
     //
+    getRestaurant: () => `${domain}/restaurant?id={id}`,
+    getRestaurants: () =>
+        `${domain}/restaurants?limit={limit}&offset={offset}&type={type}`,
+    getMenus: () => `${domain}/restaurant/menus?id={id}`,
+    // search
     searchRestByKeyword: () => `${domain}/search?keyword={keyword}`,
 };
 
