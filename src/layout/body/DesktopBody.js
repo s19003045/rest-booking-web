@@ -11,7 +11,7 @@ const DesktopBody = ({ component: Component, authorize }) => {
             <Container>
                 <Grid container justify="center">
                     <Box mt={5}>
-                        <Typography variant="h2">請使用行動版瀏覽</Typography>
+                        <Typography variant="h2">僅支援行動版瀏覽</Typography>
                     </Box>
                 </Grid>
                 {/* <Component /> */}

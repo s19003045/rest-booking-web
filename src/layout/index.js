@@ -21,12 +21,12 @@ const Layout = (props) => {
             </Hidden>
 
             {/* Body RWD */}
-            {/* <Hidden xsDown>
+            <Hidden xsDown>
                 <Body.desktop {...props} />
-            </Hidden> */}
-            {/* <Hidden smUp> */}
-            <Body.mobile {...props} />
-            {/* </Hidden> */}
+            </Hidden>
+            <Hidden smUp>
+                <Body.mobile {...props} />
+            </Hidden>
 
             {/* Footer RWD */}
             <Hidden xsDown>
