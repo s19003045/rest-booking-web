@@ -1,6 +1,6 @@
 // config for production
 const config = {
-    domain: "lcoalhost:5000",
+    domain: process.env.NODE_API_DOMAIN,
     token: "",
 };
 

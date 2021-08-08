@@ -9,12 +9,18 @@ const API = {
     // testing API
     test: () => `${domain}/test`,
     //
-    getRestaurant: () => `${domain}/restaurant?id={id}`,
+    getRestaurant: () => `${domain}/api/restaurant?id={id}`,
     getRestaurants: () =>
-        `${domain}/restaurants?limit={limit}&offset={offset}&type={type}`,
-    getMenus: () => `${domain}/restaurant/menus?id={id}`,
+        `${domain}/api/restaurants?limit={limit}&offset={offset}&type={type}`,
+    getMenus: () => `${domain}/api/restaurant/menu?id={id}`,
     // search
-    searchRestByKeyword: () => `${domain}/search?keyword={keyword}`,
+    searchRestByKeyword: () => `${domain}/api/restaurants/search?keyword={keyword}`,
 };
 
-export default API;
+const apiConfig = {
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+    },
+};
+
+export { API, apiConfig };

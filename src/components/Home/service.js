@@ -1,4 +1,4 @@
-import API from "../../API/restBooking/API";
+import { API, apiConfig} from "../../API/restBooking/API";
 import axios from "axios";
 import Act from "../../store/action";
 // todo: 先使用 mock data, 待 API 完成後要移除
@@ -22,8 +22,6 @@ export const searchRestByKeyword = (keyword, dispatch) => {
     }
 
     return new Promise((resolve, reject) => {
-        // todo: 先使用 mock data, 待 API 完成後要移除
-        const restFind = findRestByKeyword(allRestList, keyword.trim(), "name");
         if (dispatch) {
             dispatch({
                 type: Act.REMOVE_SEARCH_QUERY,
@@ -31,15 +29,17 @@ export const searchRestByKeyword = (keyword, dispatch) => {
             });
         }
 
-        resolve(restFind);
+        // todo: 先使用 mock data, 待 API 完成後要移除
+        // const restFind = findRestByKeyword(allRestList, keyword.trim(), "name");
+        // resolve(restFind);
 
         /** todo: fetch API */
-        // axios
-        //     .get(url)
-        //     .then((res) => {
-        //         resoleve(res.data);
-        //     })
-        //     .catch((err) => reject(err));
+        axios
+            .get(url, apiConfig)
+            .then((res) => {
+                resolve(res.data?.data || []);
+            })
+            .catch((err) => reject(err));
     });
 };
 
@@ -55,10 +55,6 @@ export const getRestaurant = (id, dispatch) => {
     }
 
     return new Promise((resolve, reject) => {
-        // todo: 先使用 mock data, 待 API 完成後要移除
-        const randomId = Math.floor(Math.random() * allRestList.length);
-
-        const restFind = allRestList[randomId];
         if (dispatch) {
             dispatch({
                 type: Act.REMOVE_SEARCH_QUERY,
@@ -66,15 +62,18 @@ export const getRestaurant = (id, dispatch) => {
             });
         }
 
-        resolve(restFind);
+        // todo: 先使用 mock data, 待 API 完成後要移除
+        // const randomId = Math.floor(Math.random() * allRestList.length);
+        // const restFind = allRestList[randomId];
+        // resolve(restFind);
 
         /** todo: fetch API */
-        // axios
-        //     .get(url)
-        //     .then((res) => {
-        //         resoleve(res.data);
-        //     })
-        //     .catch((err) => reject(err));
+        axios
+            .get(url, apiConfig)
+            .then((res) => {
+                resolve(res.data?.data || []);
+            })
+            .catch((err) => reject(err));
     });
 };
 
@@ -89,7 +88,7 @@ export const getRestaurants = (type, dispatch) => {
     }
 
     const url = API.getRestaurants()
-        .replace("{limit}", -1)
+        .replace("{limit}", 5)
         .replace("{offset}", 0)
         .replace("{type}", type);
 
@@ -101,10 +100,6 @@ export const getRestaurants = (type, dispatch) => {
     }
 
     return new Promise((resolve, reject) => {
-        // todo: 先使用 mock data, 待 API 完成後要移除
-        const restFind =
-            type === restaurantType.all ? allRestList : newRestList;
-
         if (dispatch) {
             dispatch({
                 type: Act.REMOVE_SEARCH_QUERY,
@@ -112,15 +107,18 @@ export const getRestaurants = (type, dispatch) => {
             });
         }
 
-        resolve(restFind);
+        // todo: 先使用 mock data, 待 API 完成後要移除
+        // const restFind =
+        //     type === restaurantType.all ? allRestList : newRestList;
+        // resolve(restFind);
 
         /** todo: fetch API */
-        // axios
-        //     .get(url)
-        //     .then((res) => {
-        //         resoleve(res.data);
-        //     })
-        //     .catch((err) => reject(err));
+        axios
+            .get(url, apiConfig)
+            .then((res) => {
+                resolve(res.data?.data || []);
+            })
+            .catch((err) => reject(err));
     });
 };
 
@@ -137,11 +135,6 @@ export const getMenus = (restId, dispatch) => {
     }
 
     return new Promise((resolve, reject) => {
-        // todo: 先使用 mock data, 待 API 完成後要移除
-        const normalImgUrls = genFakeImgUrls(10, imgSize.normal.name);
-        const thumbImgUrls = genFakeImgUrls(10, imgSize.small.name);
-        const largeImgUrls = genFakeImgUrls(10, imgSize.large.name);
-
         if (dispatch) {
             dispatch({
                 type: Act.REMOVE_SEARCH_QUERY,
@@ -149,14 +142,18 @@ export const getMenus = (restId, dispatch) => {
             });
         }
 
-        resolve({ normalImgUrls, thumbImgUrls, largeImgUrls });
+        // todo: 先使用 mock data, 待 API 完成後要移除
+        // const normalImgUrls = genFakeImgUrls(10, imgSize.normal.name);
+        // const thumbImgUrls = genFakeImgUrls(10, imgSize.small.name);
+        // const largeImgUrls = genFakeImgUrls(10, imgSize.large.name);
+        // resolve({ normalImgUrls, thumbImgUrls, largeImgUrls });
 
         /** todo: fetch API */
-        // axios
-        //     .get(url)
-        //     .then((res) => {
-        //         resoleve(res.data);
-        //     })
-        //     .catch((err) => reject(err));
+        axios
+            .get(url, apiConfig)
+            .then((res) => {
+                resolve(res.data?.data);
+            })
+            .catch((err) => reject(err));
     });
 };
