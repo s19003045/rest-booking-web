@@ -1,6 +1,6 @@
 // config for production
 const config = {
-    domain: process.env.NODE_API_DOMAIN,
+    domain: process.env.REACT_APP_API_NODE_DOMAIN,
     token: "",
 };
 
